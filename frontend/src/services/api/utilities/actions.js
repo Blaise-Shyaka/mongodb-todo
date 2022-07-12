@@ -1,5 +1,5 @@
 import axios from 'axios';
-import config from '../../../../config';
+import config from '../../../config';
 import { handleError, handleResponse } from './response';
 
 /**
@@ -10,7 +10,7 @@ import { handleError, handleResponse } from './response';
  */
 export const getResource = async ({ endpoint, params }) => {
   try {
-    const response = await axios.get(`${config.app.APIDomain}/${endpoint}`, { params });
+    const response = await axios.get(`${config.app.APIDomain}${endpoint}`, { params });
     const result = handleResponse(response);
     return result;
   } catch (error) {
@@ -26,7 +26,7 @@ export const getResource = async ({ endpoint, params }) => {
  */
 export const createResource = async ({ endpoint, resource }) => {
   try {
-    const response = await axios.post(`${config.app.APIDomain}/${endpoint}`, resource);
+    const response = await axios.post(`${config.app.APIDomain}${endpoint}`, resource);
     const result = handleResponse(response);
     return result;
   } catch (error) {
@@ -42,7 +42,7 @@ export const createResource = async ({ endpoint, resource }) => {
  */
 export const updateResource = async ({ endpoint, resource }) => {
   try {
-    const response = await axios.put(`${config.app.APIDomain}/${endpoint}`, resource);
+    const response = await axios.put(`${config.app.APIDomain}${endpoint}`, resource);
     const result = handleResponse(response);
     return result;
   } catch (error) {
@@ -57,7 +57,7 @@ export const updateResource = async ({ endpoint, resource }) => {
  */
 export const deleteResource = async ({ endpoint }) => {
   try {
-    const response = await axios.delete(`${config.app.APIDomain}/${endpoint}`);
+    const response = await axios.delete(`${config.app.APIDomain}${endpoint}`);
     const result = handleResponse(response);
     return result;
   } catch (error) {
