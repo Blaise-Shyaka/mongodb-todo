@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import makeStyles from "@mui/styles/makeStyles";
+import { useState, useEffect } from 'react';
+import makeStyles from '@mui/styles/makeStyles';
 import {
   Container,
   Typography,
@@ -9,65 +9,65 @@ import {
   Box,
   TextField,
   Checkbox,
-} from "@mui/material";
+} from '@mui/material';
 
 const useStyles = makeStyles({
   addTodoContainer: { padding: 10 },
   addTodoButton: { marginLeft: 5 },
   todosContainer: { marginTop: 10, padding: 10 },
   todoContainer: {
-    borderTop: "1px solid #bfbfbf",
+    borderTop: '1px solid #bfbfbf',
     marginTop: 5,
-    "&:first-child": {
+    '&:first-child': {
       margin: 0,
-      borderTop: "none",
+      borderTop: 'none',
     },
-    "&:hover": {
-      "& $deleteTodo": {
-        visibility: "visible",
+    '&:hover': {
+      '& $deleteTodo': {
+        visibility: 'visible',
       },
     },
   },
   todoTextCompleted: {
-    textDecoration: "line-through",
+    textDecoration: 'line-through',
   },
   deleteTodo: {
-    visibility: "hidden",
+    visibility: 'hidden',
   },
 });
 
 function Todos() {
   const classes = useStyles();
   const [todos, setTodos] = useState([]);
-  const [newTodoText, setNewTodoText] = useState("");
+  const [newTodoText, setNewTodoText] = useState('');
 
   useEffect(() => {
-    fetch("http://localhost:3001/")
+    fetch('http://localhost:3001/')
       .then((response) => response.json())
       .then((todos) => setTodos(todos));
   }, [setTodos]);
 
   function addTodo(text) {
-    fetch("http://localhost:3001/", {
+    fetch('http://localhost:3001/', {
       headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
       },
-      method: "POST",
+      method: 'POST',
       body: JSON.stringify({ text }),
     })
       .then((response) => response.json())
       .then((todo) => setTodos([...todos, todo]));
-    setNewTodoText("");
+    setNewTodoText('');
   }
 
   function toggleTodoCompleted(id) {
     fetch(`http://localhost:3001/${id}`, {
       headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
       },
-      method: "PUT",
+      method: 'PUT',
       body: JSON.stringify({
         completed: !todos.find((todo) => todo.id === id).completed,
       }),
@@ -84,7 +84,7 @@ function Todos() {
 
   function deleteTodo(id) {
     fetch(`http://localhost:3001/${id}`, {
-      method: "DELETE",
+      method: 'DELETE',
     }).then(() => setTodos(todos.filter((todo) => todo.id !== id)));
   }
 
@@ -100,7 +100,7 @@ function Todos() {
               fullWidth
               value={newTodoText}
               onKeyPress={(event) => {
-                if (event.key === "Enter") {
+                if (event.key === 'Enter') {
                   addTodo(newTodoText);
                 }
               }}
@@ -130,10 +130,10 @@ function Todos() {
                 <Checkbox
                   checked={completed}
                   onChange={() => toggleTodoCompleted(id)}
-                ></Checkbox>
+                />
                 <Box flexGrow={1}>
                   <Typography
-                    className={completed ? classes.todoTextCompleted : ""}
+                    className={completed ? classes.todoTextCompleted : ''}
                     variant="body1"
                   >
                     {text}

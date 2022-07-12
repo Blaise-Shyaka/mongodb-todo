@@ -58,7 +58,7 @@ app.put('/:id', async (req, res) => {
     return;
   }
 
-  await database.client.db('todos').collection('todo').updateOne(
+  await database.client.db('todos').collection('todos').updateOne(
     { id },
     { $set: { completed } },
   );
