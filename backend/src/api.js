@@ -50,9 +50,9 @@ app.post('/', async (req, res) => {
 
 app.put('/:id', async (req, res) => {
   const { id } = req.params;
-  const { completed } = req.body;
+  const { field } = req.body;
 
-  if (typeof completed !== 'boolean') {
+  if ( field.completed && typeof field.completed !== 'boolean') {
     res.status(400);
     res.json({ message: "invalid 'completed' expected boolean" });
     return;
@@ -60,7 +60,7 @@ app.put('/:id', async (req, res) => {
 
   await database.client.db('todos').collection('todos').updateOne(
     { id },
-    { $set: { completed } },
+    { $set: field },
   );
   res.status(200);
   res.end();

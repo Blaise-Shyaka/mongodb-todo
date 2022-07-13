@@ -39,12 +39,13 @@ function Todos() {
   }
 
   function todosSetter(todos) {
+    setError();
     setTodos(todos);
   }
 
   return (
     <Container maxWidth="md">
-      <Typography>{error}</Typography>
+      <Typography textAlign="center" color="error">{error}</Typography>
       <TodoHeader title={texts.todosHeader} />
       <NewTodo todos={todos} errorHandler={(error) => errorHandler(error)} todosSetter={(error) => todosSetter(error)} />
       {todos.length > 0 && (

@@ -22,9 +22,9 @@ export function handleResponse(response) {
  */
 export function handleError(error) {
   if (error.isAxiosError) {
-    if (error.response?.data?.errors) {
-      const { status, statusText } = error.response;
-      throw new Error(`${status}: ${statusText}`);
+    if (error.response?.data?.message) {
+      const { status, data, statusText } = error.response;
+      throw new Error(`Error ${status}: ${data?.message || statusText}`);
     }
 
     throw new Error(errorMessages.networkError);
