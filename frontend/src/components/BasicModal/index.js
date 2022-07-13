@@ -39,6 +39,7 @@ BasicModal.propTypes = {
   modalContent: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.array,
+    PropTypes.node,
   ]).isRequired,
   modalTitle: PropTypes.string,
   onClose: PropTypes.func.isRequired,

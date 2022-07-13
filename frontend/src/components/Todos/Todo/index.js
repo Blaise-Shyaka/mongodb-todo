@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import makeStyles from '@mui/styles/makeStyles';
@@ -10,9 +11,8 @@ import {
   TextField,
 } from '@mui/material';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import { useState } from 'react';
-import BasicModal from '../../BasicModal';
 
+import BasicModal from '../../BasicModal';
 import todosApi from '../../../services/api/todos';
 import texts from '../../../constants/texts';
 
@@ -120,15 +120,15 @@ function Todo({ todos, todo, errorHandler, todosSetter }) {
             startIcon={<CalendarMonthIcon color="primary" />}
             onClick={() => setOpen(true)}
           />
-          <Typography sx={{ fontSize: '0.6rem' }}>{todo.dueDate || 'Not Set'}</Typography>
+          <Typography sx={{ fontSize: '0.6rem' }}>{todo.dueDate || texts.notSet}</Typography>
         </Box>
         <BasicModal
-          modalTitle="Set Todo Due Date"
+          modalTitle={texts.setTodoDueDate}
           modalContent={<TextField value={dueDate} onChange={(e) => setDueDate(e.target.value)} type="date" />}
           open={open}
           onClose={() => setOpen(false)}
           action={() => changeTodoDueDate(id, dueDate)}
-          actionText="Set Due Date"
+          actionText={texts.setDueDate}
         />
       </Box>
       <Button
